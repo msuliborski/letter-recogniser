@@ -38,7 +38,7 @@ layers = [
 
 options = trainingOptions('sgdm', ...
     'InitialLearnRate', 0.01, ...
-    'MaxEpochs', 3, ...
+    'MaxEpochs', 2, ...
     'Shuffle', 'every-epoch', ...
     'ValidationData', imds2Validation, ...
     'ValidationFrequency', 30, ...
@@ -56,22 +56,42 @@ net = trainNetwork(imds2Train, layers, options);
 imds3 = imageDatastore(fullfile('folder_3'), 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
 
 
-imds3Accurcy = sum(classify(net, imds3) == imds3.Labels)/numel(imds3.Labels);
+
+
+
+
+
+
+
+
+imds3Accurcy = sum(classify(net, imds3) == imds3.Labels)/numel(imds3.Labels)
 
 
 
 
 % continue with pkt c
 %retrain
-net = trainNetwork(imds3, layers, options);
+retrainedNet1 = trainNetwork(imds3, net.Layers, options);
 
 
 imds1 = imageDatastore(fullfile('folder_1'), 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
 
 
-imds1Accurcy = sum(classify(net, imds1) == imds1.Labels)/numel(imds1.Labels);
-imds2Accurcy = sum(classify(net, imds2) == imds2.Labels)/numel(imds2.Labels);
-imds3Accurcy = sum(classify(net, imds3) == imds3.Labels)/numel(imds3.Labels);
+imds1Accurcy = sum(classify(retrainedNet1, imds1) == imds1.Labels)/numel(imds1.Labels)
+imds2Accurcy = sum(classify(retrainedNet1, imds2) == imds2.Labels)/numel(imds2.Labels)
+imds3Accurcy = sum(classify(retrainedNet1, imds3) == imds3.Labels)/numel(imds3.Labels)
+
+
+
+% retrain with all
+
+retrainedNet2 = trainNetwork(imds1, retrainedNet1.Layers, options);
+retrainedNet2 = trainNetwork(imds2, retrainedNet2.Layers, options);
+
+
+imds1Accurcy = sum(classify(retrainedNet1, imds1) == imds1.Labels)/numel(imds1.Labels)
+imds2Accurcy = sum(classify(retrainedNet1, imds2) == imds2.Labels)/numel(imds2.Labels)
+imds3Accurcy = sum(classify(retrainedNet1, imds3) == imds3.Labels)/numel(imds3.Labels)
 
 
 
@@ -80,6 +100,17 @@ imds3Accurcy = sum(classify(net, imds3) == imds3.Labels)/numel(imds3.Labels);
 
 
 
+
+a = imread('custom\a.png');
+dla_arka = classify(retrainedNet2, a(1:28, 1:28, 1:1))
+e = imread('custom\e.png');
+dla_arka = classify(retrainedNet2, e(1:28, 1:28, 1:1))
+i = imread('custom\i.png');
+dla_arka = classify(retrainedNet2, i(1:28, 1:28, 1:1))
+o = imread('custom\o.png');
+dla_arka = classify(retrainedNet2, o(1:28, 1:28, 1:1))
+u = imread('custom\u.png');
+dla_arka = classify(retrainedNet2, u(1:28, 1:28, 1:1))
 
 
 
