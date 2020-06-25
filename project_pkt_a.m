@@ -1,36 +1,29 @@
-% A = im2bw(imread('Folder_1/A/A.jpg'),0.5)
-% E = im2bw(imread('Folder_1/E/E.jpg'),0.5)
-% I = im2bw(imread('Folder_1/I/I.jpg'),0.5)
-% O = im2bw(imread('Folder_1/O/O.jpg'),0.5)
-% U = im2bw(imread('Folder_1/U/U.jpg'),0.5)
 
+clear;
 
-digitDatasetPath = fullfile('Folder_1');
-imds = imageDatastore(digitDatasetPath, 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
-imds = transform(imds,@imbinarize).UnderlyingDatastore;
+imds1 = imageDatastore(fullfile('folder_1'), 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
 
-
-labelCount = countEachLabel(imds);
-img = readimage(imds,1);
+labelCount = countEachLabel(imds1);
+img = readimage(imds1, 1);
 size(img);
 
 
 layers = [
     imageInputLayer([28 28 1])
     
-    convolution2dLayer(3,8,'Padding','same')
+    convolution2dLayer(3, 8, 'Padding', 'same')
     batchNormalizationLayer
     reluLayer
     
-    maxPooling2dLayer(2,'Stride',2)
+    maxPooling2dLayer(2, 'Stride', 2)
     
-    convolution2dLayer(3,16,'Padding','same')
+    convolution2dLayer(3, 16, 'Padding', 'same')
     batchNormalizationLayer
     reluLayer
     
-    maxPooling2dLayer(2,'Stride',2)
+    maxPooling2dLayer(2, 'Stride', 2)
     
-    convolution2dLayer(3,32,'Padding','same')
+    convolution2dLayer(3, 32, 'Padding', 'same')
     batchNormalizationLayer
     reluLayer
     
@@ -39,20 +32,17 @@ layers = [
     classificationLayer];
 
 options = trainingOptions('sgdm', ...
-    'InitialLearnRate',0.01, ...
-    'MaxEpochs',3, ...
-    'Shuffle','every-epoch', ...
-    'ValidationData',imds, ...
-    'ValidationFrequency',30, ...
-    'Verbose',false, ...
-    'Plots','training-progress');
+    'InitialLearnRate', 0.01, ...
+    'MaxEpochs', 3, ...
+    'Shuffle', 'every-epoch', ...
+    'ValidationData', imds1, ...
+    'ValidationFrequency', 30, ...
+    'Verbose', false, ...
+    'Plots', 'training-progress');
 
-net = trainNetwork(imds,layers,options);
+net = trainNetwork(imds1, layers, options);
 
-YPred = classify(net,imds);
-YValidation = imds.Labels;
-
-accuracy = sum(YPred == YValidation)/numel(YValidation)
+imds1Accuracy = sum(classify(net, imds1) == imds1.Labels)/numel(imds1.Labels);
 
 
 

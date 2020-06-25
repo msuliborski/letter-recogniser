@@ -1,6 +1,9 @@
 
 clear;
 
+% network from pkt b
+
+
 imds2 = imageDatastore(fullfile('folder_2'), 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
 
 labelCount = countEachLabel(imds2);
@@ -45,15 +48,42 @@ options = trainingOptions('sgdm', ...
 net = trainNetwork(imds2Train, layers, options);
 
 
-imds2TestAccuracy = sum(classify(net, imds2Test) == imds2Test.Labels)/numel(imds2Test.Labels);
 
+
+
+%check of folder_3
+
+imds3 = imageDatastore(fullfile('folder_3'), 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
+
+
+imds3Accurcy = sum(classify(net, imds3) == imds3.Labels)/numel(imds3.Labels);
+
+
+
+
+% continue with pkt c
+%retrain
+net = trainNetwork(imds3, layers, options);
 
 
 imds1 = imageDatastore(fullfile('folder_1'), 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
 
 
+imds1Accurcy = sum(classify(net, imds1) == imds1.Labels)/numel(imds1.Labels);
+imds2Accurcy = sum(classify(net, imds2) == imds2.Labels)/numel(imds2.Labels);
+imds3Accurcy = sum(classify(net, imds3) == imds3.Labels)/numel(imds3.Labels);
 
-imds1Accuracy = sum(classify(net, imds1) == imds1.Labels)/numel(imds1.Labels);
+
+
+
+
+
+
+
+
+
+
+
 
 
 
