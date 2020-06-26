@@ -23,24 +23,22 @@ labelsAmount = length(imds1.Labels);
 % Layers presets
 % Activation Layers
 
-% reluLayer
-% A ReLU layer performs a threshold operation to each element of the input, where any value less than zero is set to zero.
-
+% reluLayer - A ReLU layer performs a threshold operation to each element of the input, where any value less than zero is set to zero.
 % leakyReluLayer
-% A leaky ReLU layer performs a threshold operation, where any input value less than zero is multiplied by a fixed scalar.
 
-% clippedReluLayer
-% A clipped ReLU layer performs a threshold operation, where any input value less than zero is set to zero and any value above the clipping ceiling is set to that clipping ceiling.
+A leaky ReLU layer performs a threshold operation, where any input value less than zero is multiplied by a fixed scalar.
+ clippedReluLayer
 
-% reluLayer
-% An ELU activation layer performs the identity operation on positive inputs and an exponential nonlinearity on negative inputs.
+A clipped ReLU layer performs a threshold operation, where any input value less than zero is set to zero and any value above the clipping ceiling is set to that clipping ceiling.
+ eluLayer
 
-% tanhLayer
-% A hyperbolic tangent (tanh) activation layer applies the tanh function on the layer inputs.
+An ELU activation layer performs the identity operation on positive inputs and an exponential nonlinearity on negative inputs.
+ tanhLayer
 
-% preluLayer (Custom layer example)
-% A PReLU layer performs a threshold operation, where for each channel, any input value less than zero is multiplied by a scalar learned at training time.
+A hyperbolic tangent (tanh) activation layer applies the tanh function on the layer inputs.
+ preluLayer (Custom layer example)
 
+A PReLU layer performs a threshold operation, where for each channel, any input value less than zero is multiplied by a scalar learned at training time.
 convolutialNetwork = [
     imageInputLayer([28 28 1])
     
@@ -160,7 +158,7 @@ layerSet10Neurons2Layer = [
 
 
 %%% Option presets
-% trainlm, trainru, trainb, trainr, trainc, trains, trainbu, trainscg, traingdx
+% trainru, trainb, trainr, trainc, trains, trainbu, trainscg, traingdx
 % traingdm, traingd, trainbr, traingda
 optionSetPkt1 = trainingOptions('sgdm', ...
     'InitialLearnRate', 0.01, ...

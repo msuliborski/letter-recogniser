@@ -2,8 +2,7 @@ function iris_ex()
 %IRIS_DATASET Summary of this function goes here
 %   Detailed explanation goes here
 
-clear all;
-close all;
+clear;
 
 % Load the dataset
 load iris_dataset;
