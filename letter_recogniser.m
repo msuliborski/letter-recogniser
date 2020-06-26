@@ -2,12 +2,11 @@
 clear;
 
 
-
 %%% All data
 imds1 = imageDatastore(fullfile('set_1'), 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
 
 imds2 = imageDatastore(fullfile('set_2'), 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
-[imds2Train,imds2Rest] = splitEachLabel(imds2, 140, 'randomize');
+[imds2Train, imds2Rest] = splitEachLabel(imds2, 140, 'randomize');
 [imds2Validation, imds2Test] = splitEachLabel(imds2Rest, 30, 'randomize');
 
 imds3 = imageDatastore(fullfile('set_3'), 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
@@ -15,13 +14,15 @@ imds3 = imageDatastore(fullfile('set_3'), 'IncludeSubfolders', true, 'LabelSourc
 imds123 = imageDatastore({fullfile('set_1'), fullfile('set_2'), fullfile('set_3')}, 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
 
 imdsCustom = imageDatastore(fullfile('set_custom'), 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
+[imdsCustomTrain, imdsCustomTest] = splitEachLabel(imdsCustom, 15, 'randomize');
 
 labelsAmount = length(imds1.Labels);
 
 
 
 % Layers presets
-layerSetDefault = [
+% radbas, reluLayer
+convolutialNetwork = [
     imageInputLayer([28 28 1])
     
     convolution2dLayer(3, 8, 'Padding', 'same')
@@ -34,10 +35,62 @@ layerSetDefault = [
     batchNormalizationLayer
     reluLayer
     
+    fullyConnectedLayer(labelsAmount)
+    softmaxLayer
+    classificationLayer];
+
+deepConvolutialNetwork = [
+    imageInputLayer([28 28 1])
+    
+    convolution2dLayer(3, 32, 'Padding', 'same')
+    batchNormalizationLayer
+    reluLayer
+    
+    maxPooling2dLayer(2, 'Stride', 2)
+    
+    convolution2dLayer(3, 64, 'Padding', 'same')
+    batchNormalizationLayer
+    reluLayer
+    
+    maxPooling2dLayer(2, 'Stride', 2)
+    
+    convolution2dLayer(3, 64, 'Padding', 'same')
+    batchNormalizationLayer
+    reluLayer
+    
     maxPooling2dLayer(2, 'Stride', 2)
     
     convolution2dLayer(3, 32, 'Padding', 'same')
     batchNormalizationLayer
+    reluLayer
+
+    
+    fullyConnectedLayer(labelsAmount)
+    softmaxLayer
+    classificationLayer];
+
+
+feedForwardNetwork = [
+    imageInputLayer([28 28 1])
+    
+    fullyConnectedLayer(32)
+    reluLayer
+    
+    fullyConnectedLayer(labelsAmount)
+    softmaxLayer
+    classificationLayer];
+
+
+deepFeedForwardNetwork = [
+    imageInputLayer([28 28 1])
+    
+    fullyConnectedLayer(1024)
+    reluLayer
+    
+    fullyConnectedLayer(1024)
+    reluLayer
+    
+    fullyConnectedLayer(1024)
     reluLayer
     
     fullyConnectedLayer(labelsAmount)
@@ -77,6 +130,8 @@ layerSet10Neurons2Layer = [
 
 
 %%% Option presets
+% trainru, trainb, trainr, trainc, trains, trainbu, trainscg, traingdx
+% traingdm, traingd, trainbr, traingda
 optionSetPkt1 = trainingOptions('sgdm', ...
     'InitialLearnRate', 0.01, ...
     'MaxEpochs', 2, ...
@@ -104,10 +159,7 @@ optionSetPkt3 = trainingOptions('sgdm', ...
     'Plots', 'training-progress');
 
 
-
-
-
-%%% Pkt a
+% Pkt a 
 disp('Train network netPkt1');
 netPkt1 = trainNetwork(imds1, layerSet10Neurons1Layer, optionSetPkt1);
 disp('Check all the prediction values and calculate final accuracy'); 
@@ -147,6 +199,14 @@ imds3Accuracy = sum(classify(net2Pkt3, imds3) == imds3.Labels)/numel(imds3.Label
 disp('Check all the prediction values and calculate accuracy of a best network in pkt c on set_custom');
 imds1Prediction = predict(net2Pkt3, imdsCustom)
 imds1Accuracy = sum(classify(net2Pkt3, imdsCustom) == imdsCustom.Labels)/numel(imdsCustom.Labels)
+
+%%%%
+disp('chuj');
+
+pedal7 = trainNetwork(imds123, deepConvolutialNetwork, optionSetPkt3);
+%pedal7 = trainNetwork(imdsCustomTrain, pedal7.Layers, optionSetPkt3);
+imds1Prediction = predict(pedal7, imdsCustom)
+imds1Accuracy = sum(classify(pedal7, imdsCustom) == imdsCustom.Labels)/numel(imdsCustom.Labels)
 
 
 

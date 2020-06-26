@@ -2,14 +2,14 @@
 
 
 % Specify the folder where the files live.
-myFolder = 'C:\Users\Michael\Documents\Knowledge-and-Reasoning---NN\set_custom\A';
+myFolder = 'C:\Users\Michael\Documents\Knowledge-and-Reasoning---NN\set_custom\U';
 % Check to make sure that folder actually exists.  Warn user if it doesn't.
 if ~isfolder(myFolder)
 	errorMessage = sprintf('Error: The following folder does not exist:\n%s\nPlease select another folder.', myFolder);
 	uiwait(warndlg(errorMessage));
 	myFolder = uigetdir();
 end
-filePattern = fullfile(myFolder, '*.{png}'); % Change to whatever pattern you need.
+filePattern = fullfile(myFolder, '*.png'); % Change to whatever pattern you need.
 theFiles = dir(filePattern);
 numFiles = length(theFiles);
 if numFiles == 0
