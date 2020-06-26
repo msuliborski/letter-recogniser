@@ -1,7 +1,7 @@
 
 clear;
 
-imds2 = imageDatastore(fullfile('folder_2'), 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
+imds2 = imageDatastore(fullfile('set_2'), 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
 
 labelCount = countEachLabel(imds2);
 img = readimage(imds2, 1);
@@ -35,7 +35,7 @@ layers = [
 
 options = trainingOptions('sgdm', ...
     'InitialLearnRate', 0.01, ...
-    'MaxEpochs', 3, ...
+    'MaxEpochs', 30, ...
     'Shuffle', 'every-epoch', ...
     'ValidationData', imds2Validation, ...
     'ValidationFrequency', 30, ...
@@ -49,7 +49,7 @@ imds2TestAccuracy = sum(classify(net, imds2Test) == imds2Test.Labels)/numel(imds
 
 
 
-imds1 = imageDatastore(fullfile('folder_1'), 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
+imds1 = imageDatastore(fullfile('set_1'), 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
 
 
 

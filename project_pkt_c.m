@@ -4,7 +4,7 @@ clear;
 % network from pkt b
 
 
-imds2 = imageDatastore(fullfile('folder_2'), 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
+imds2 = imageDatastore(fullfile('set_2'), 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
 
 labelCount = countEachLabel(imds2);
 img = readimage(imds2, 1);
@@ -53,7 +53,7 @@ net = trainNetwork(imds2Train, layers, options);
 
 %check of folder_3
 
-imds3 = imageDatastore(fullfile('folder_3'), 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
+imds3 = imageDatastore(fullfile('set_3'), 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
 
 
 
@@ -74,7 +74,7 @@ imds3Accurcy = sum(classify(net, imds3) == imds3.Labels)/numel(imds3.Labels)
 retrainedNet1 = trainNetwork(imds3, net.Layers, options);
 
 
-imds1 = imageDatastore(fullfile('folder_1'), 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
+imds1 = imageDatastore(fullfile('set_1'), 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
 
 
 imds1Accurcy = sum(classify(retrainedNet1, imds1) == imds1.Labels)/numel(imds1.Labels)
@@ -101,15 +101,15 @@ imds3Accurcy = sum(classify(retrainedNet1, imds3) == imds3.Labels)/numel(imds3.L
 
 
 
-a = imread('custom\a.png');
+a = imread('set_custom\a.png');
 dla_arka = classify(retrainedNet2, a(1:28, 1:28, 1:1))
-e = imread('custom\e.png');
+e = imread('set_custom\e.png');
 dla_arka = classify(retrainedNet2, e(1:28, 1:28, 1:1))
-i = imread('custom\i.png');
+i = imread('set_custom\i.png');
 dla_arka = classify(retrainedNet2, i(1:28, 1:28, 1:1))
-o = imread('custom\o.png');
+o = imread('set_custom\o.png');
 dla_arka = classify(retrainedNet2, o(1:28, 1:28, 1:1))
-u = imread('custom\u.png');
+u = imread('set_custom\u.png');
 dla_arka = classify(retrainedNet2, u(1:28, 1:28, 1:1))
 
 

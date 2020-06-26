@@ -1,7 +1,7 @@
 
 clear;
 
-imds1 = imageDatastore(fullfile('folder_1'), 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
+imds1 = imageDatastore(fullfile('set_1'), 'IncludeSubfolders', true, 'LabelSource', 'foldernames');
 
 labelCount = countEachLabel(imds1);
 img = readimage(imds1, 1);
@@ -41,9 +41,8 @@ options = trainingOptions('sgdm', ...
     'Plots', 'training-progress');
 
 net = trainNetwork(imds1, layers, options);
-
-imds1Accuracy = sum(classify(net, imds1) == imds1.Labels)/numel(imds1.Labels);
-
+imds1Predistion = predict(net, imds1)
+imds1Accuracy = sum(classify(net, imds1) == imds1.Labels)/numel(imds1.Labels)
 
 
 % https://www.mathworks.com/help/deeplearning/ug/create-simple-deep-learning-network-for-classification.html
