@@ -230,6 +230,11 @@ classdef letter_functions
             end
             arr = cell2mat(arr);
         end
+		
+		function saveNetwork(name, net)
+			save('name', net);
+		end
+		
         
     end  
 end
