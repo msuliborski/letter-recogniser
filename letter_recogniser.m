@@ -232,12 +232,11 @@ optionSetPkt3 = trainingOptions('sgdm', ...
 % imds1Accuracy = sum(classify(net2Pkt3, imdsCustom) == imdsCustom.Labels)/numel(imdsCustom.Labels)
 % 
 % %%%%
-% disp('chuj');
 % 
-% pedal7 = trainNetwork(imds123, deepConvolutialNetwork, optionSetPkt3);
-% %pedal7 = trainNetwork(imdsCustomTrain, pedal7.Layers, optionSetPkt3);
-% imds1Prediction = predict(pedal7, imdsCustom)
-% imds1Accuracy = sum(classify(pedal7, imdsCustom) == imdsCustom.Labels)/numel(imdsCustom.Labels)
+% test1 = trainNetwork(imds123, deepConvolutialNetwork, optionSetPkt3);
+% %test1 = trainNetwork(imdsCustomTrain, test1.Layers, optionSetPkt3);
+% imds1Prediction = predict(test1, imdsCustom)
+% imds1Accuracy = sum(classify(test1, imdsCustom) == imdsCustom.Labels)/numel(imdsCustom.Labels)
 
 
 
