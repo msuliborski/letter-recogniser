@@ -99,7 +99,6 @@ end
 
 images = [my_imgA my_imgE my_imgI my_imgO my_imgU]
 targets = [targetA targetE targetI targetO targetU]
-a = [[10] [20]]
 net = feedforwardnet([10])
 net.trainFcn = 'trainlm'
 
