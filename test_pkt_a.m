@@ -1,9 +1,9 @@
 
 %%% Test
-for i = 1:5
+for i = 1:5    
     clear;
     disp(i);
-    % Used: 10   5,5   10,10   10,20,10   10,30,50,30,10 
+    % Used: 10   5,5   10,10   10,20,30   10,20,30,40,60 
     net = letter_functions.createNet('10'); 
     % Used: trainlm, trainbfg, trainbr, traingda, trainr
     net = letter_functions.selectTraining(net, 'trainlm'); 
