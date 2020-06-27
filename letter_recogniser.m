@@ -189,13 +189,13 @@ optionSetPkt3 = trainingOptions('sgdm', ...
     'Plots', 'training-progress');
 
 
-% Pkt a 
-
-disp('Train network netPkt1');
-netPkt1 = trainNetwork(imds1, convolutialNetwork, optionSetPkt1);
-disp('Check all the prediction values and calculate final accuracy'); 
-imds1Prediction = predict(netPkt1, imds1)
-imds1Accuracy = sum(classify(netPkt1, imds1) == imds1.Labels)/numel(imds1.Labels)
+% % Pkt a 
+% 
+% disp('Train network netPkt1');
+% netPkt1 = trainNetwork(imds1, convolutialNetwork, optionSetPkt1);
+% disp('Check all the prediction values and calculate final accuracy'); 
+% imds1Prediction = predict(netPkt1, imds1)
+% imds1Accuracy = sum(classify(netPkt1, imds1) == imds1.Labels)/numel(imds1.Labels)
 % 
 % % Pkt b
 % disp('Calculate accuracy ont set_2 based only on netPkt1 {out of curiosity}');
