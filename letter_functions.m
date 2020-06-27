@@ -1,5 +1,50 @@
 classdef letter_functions
     methods(Static)
+        function[inputs, targets] = getDataset(type)
+            inputsSet1 = [];
+            targetsSet1 = [];
+
+            inputsSet2 = [];
+            targetsSet2 = [];
+
+            inputsSet3 = [];
+            targetsSet3 = [];
+
+            inputsSetCustom = [];
+            targetsSetCustom = [];
+
+            inputsSet123 = [];
+            targetsSet123 = [];
+
+            inputsSetAll = [];
+            targetsSetAll = [];
+            
+            if strcmp(type, '1') 
+                [inputs, targets] = letter_functions.readDataSet('set_1');
+            elseif strcmp(type, '2') 
+                [inputs, targets] = letter_functions.readDataSet('set_2');
+            elseif strcmp(type, '3')
+                [inputs, targets] = letter_functions.readDataSet('set_3');
+            elseif strcmp(type, 'custom')
+                [inputs, targets] = letter_functions.readDataSet('set_custom');
+            elseif strcmp(type, '123')
+                [inputsSet1, targetsSet1] = letter_functions.readDataSet('set_1');
+                [inputsSet2, targetsSet2] = letter_functions.readDataSet('set_2');
+                [inputsSet3, targetsSet3] = letter_functions.readDataSet('set_3');
+                inputs = [inputsSet1 inputsSet2 inputsSet3];
+                targets = [targetsSet1 targetsSet2 targetsSet3];
+            elseif strcmp(type, 'all')
+                [inputsSet1, targetsSet1] = letter_functions.readDataSet('set_1');
+                [inputsSet2, targetsSet2] = letter_functions.readDataSet('set_2');
+                [inputsSet3, targetsSet3] = letter_functions.readDataSet('set_3');
+                [inputsSetCustom, targetsSetCustom] = letter_functions.readDataSet('set_custom');
+                inputsSet123 = [inputsSet1 inputsSet2 inputsSet3];
+                targetsSet123 = [targetsSet1 targetsSet2 targetsSet3];
+                inputs = [inputsSet123 inputsSetCustom];
+                targets = [targetsSet123 targetsSetCustom];
+            end
+        end
+        
         function[inputs, targets] = readDataSetVowel(set_name, vowel, matrixLabel)
             inputs = [];
             targets = [];
@@ -44,7 +89,6 @@ classdef letter_functions
 
             networkConfiguration = [];
             networkConfiguration = letter_functions.stringToNumericArray(netInfo);
-            disp(networkConfiguration);
             net = feedforwardnet(networkConfiguration);
 
         end
