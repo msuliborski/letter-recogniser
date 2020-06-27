@@ -3,7 +3,7 @@ inputs = [];
 targets = [];
 
 [inputs, targets] = letter_functions.readDataSet('set_1');
-net = feedforwardnet([10]);
+net = letter_functions.createNet('10 20 10')
 net = letter_functions.selectTraining(net, 'trainlm');
 net = letter_functions.selectActivation(net, 'purelin');
 [net, tr] = letter_functions.trainFunction(net, inputs, targets);
