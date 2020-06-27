@@ -171,6 +171,11 @@ classdef letter_functions
 
             accuracy = r/size(out,2)*100;
         end
+        
+        function output = classifyImage(net, image)
+            imageOneD = image(:)';
+            output = classify(net, imageOneD);
+        end
 
         function accuracy = getAccuracyOfInput(net, inputs, targets)
             out = sim(net, inputs);
