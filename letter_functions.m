@@ -131,7 +131,7 @@ classdef letter_functions
           end
         end
 
-        accuracy = r/size(out,2)*100;
+        accuracy = r/size(out,2)*100
     end  
     
     end
