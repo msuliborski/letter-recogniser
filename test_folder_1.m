@@ -3,7 +3,7 @@ inputs = [];
 targets = [];
 
 [inputs, targets] = letter_functions.readDataSet('set_1');
-net = letter_functions.createNet('10 20 10')
+net = letter_functions.createNet('10')
 net = letter_functions.selectTraining(net, 'trainlm');
 net.layers{1}.transferFcn = 'tansig';
 net.layers{2}.transferFcn = 'purelin';

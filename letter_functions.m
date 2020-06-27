@@ -229,7 +229,6 @@ classdef letter_functions
                 arr{1, i} = str2num(arr{1, i});
             end
             arr = cell2mat(arr);
-            accuracy = r/size(out,2)*100
         end
         
     end  
