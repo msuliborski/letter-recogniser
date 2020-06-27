@@ -52,7 +52,7 @@ classdef letter_functions
             filePath1 = strcat(filePath, '\');
             %extension = '/*.png';
             folder_pngs_path =  strcat(filePath1, '*.png');
-            images  = dir(folder_pngs_path );
+            images  = dir(folder_pngs_path )
             nfile = max(size(images));
 
             for i=1:nfile
