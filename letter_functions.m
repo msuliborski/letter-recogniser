@@ -223,5 +223,11 @@ classdef letter_functions
             arr = cell2mat(arr);
         end
 
+<<<<<<< HEAD
+        accuracy = r/size(out,2)*100
+    end  
+    
+=======
+>>>>>>> 5828721aef923a70e1391fb94afee7056fffadda
     end
 end
