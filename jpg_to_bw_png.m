@@ -1,44 +1,99 @@
 
 
-
-% Specify the folder where the files live.
-myFolder = 'C:\Users\Michael\Documents\Knowledge-and-Reasoning---NN\set_custom\U';
-% Check to make sure that folder actually exists.  Warn user if it doesn't.
-if ~isfolder(myFolder)
-	errorMessage = sprintf('Error: The following folder does not exist:\n%s\nPlease select another folder.', myFolder);
-	uiwait(warndlg(errorMessage));
-	myFolder = uigetdir();
-end
-filePattern = fullfile(myFolder, '*.png'); % Change to whatever pattern you need.
-theFiles = dir(filePattern);
-numFiles = length(theFiles);
-if numFiles == 0
-	warningMessage = sprintf('Warning: no JPG images found in the folder:\n%s', myFolder);
-	uiwait(warnuser(warningMessage));
-	return;
-end
-for k = 1 : numFiles
-    sprintf('dddd');
-	baseFileName = theFiles(k).name;
-	fullFileName = fullfile(myFolder, baseFileName);
-	fprintf('Now reading %s (#%d of %d).\n', fullFileName, k, numFiles);
-	% Now do whatever you want with this file name,
-	% such as reading it in as an image array with imread()
-    
-    a = imread(fullFileName)
-    
-    [rows, columns, numberOfColorChannels] = size(a);
-    if numberOfColorChannels < 3
-      continue;
-    end
-    
-    b = rgb2gray(a)
-    imageArray = imbinarize(b, 0.3)
-    
-    
-	% Write it out as a PNG file.
-	baseFileName = strrep(lower(baseFileName), '.jpg', '.png');
-	outputFileName = fullfile(myFolder, baseFileName)
-	fprintf(1, 'Now writing %s\n', outputFileName);
- 	imwrite(imageArray, outputFileName);
-end
+% function test
+%   % convFolderToBinary('test')
+%   % convImgToBinary('test\rgb-png.png')
+%   stringToNumericArray('10 24 22 2')
+% end
+% 
+%  
+% function convImgToBinary(pathToImage)
+%     if ~isfile(pathToImage)
+%         disp('It is not a file!');
+%         return;
+%     end
+% 
+%     theFile = dir(fullfile(pathToImage));
+% 
+%     baseFileName = theFile.name;
+%     fullFileName = fullfile(pathToImage);
+%     fprintf('Now reading \n');
+% 
+%     image = imread(fullFileName);
+% 
+%     if islogical(image)
+%         return;
+%     end
+% 
+%     [rows, columns, numberOfColorChannels] = size(image);
+%     if numberOfColorChannels == 3
+%         greyImage = rgb2gray(image);
+%     else
+%         greyImage = image;
+%     end
+% 
+%     binaryImageArray = imbinarize(greyImage, 0.5);
+% 
+%     baseFileName = strrep(fullFileName, '.jpg', '.png');
+%     outputFileName = fullfile(baseFileName);
+%     fprintf(1, 'Now deleting previous file \n');
+%     delete(fullFileName)
+%     fprintf(1, 'Now writing \n');
+%     imwrite(binaryImageArray, outputFileName);
+% end
+% 
+% function convFolderToBinary(pathToFolder)
+%     if ~isfolder(pathToFolder)
+%         disp('It is not a folder!');
+%         return;
+%     end
+%     filePatternPNG = fullfile(pathToFolder, '*.png');
+%     filePatternJPG = fullfile(pathToFolder, '*.jpg');
+%     theFiles = [dir(filePatternPNG); dir(filePatternJPG)];
+%     numFiles = length(theFiles);
+%     if numFiles == 0 
+%         disp('No files in the folder!');
+%         return;
+%     end
+%     
+%     for i = 1 : numFiles
+%         baseFileName = theFiles(i).name;
+%         fullFileName = fullfile(pathToFolder, baseFileName);
+%         fprintf('Now reading %s (#%d of %d).\n', fullFileName, i, numFiles);
+% 
+%         image = imread(fullFileName);
+%         
+%         if islogical(image)
+%             continue;
+%         end
+% 
+%         [rows, columns, numberOfColorChannels] = size(image);
+%         if numberOfColorChannels == 3
+%             greyImage = rgb2gray(image);
+%         else
+%             greyImage = image;
+%         end
+% 
+%         binaryImageArray = imbinarize(greyImage, 0.5);
+% 
+%         baseFileName = strrep(lower(baseFileName), '.jpg', '.png');
+%         outputFileName = fullfile(pathToFolder, baseFileName);
+%         fprintf(1, 'Now deleting previous file %s\n', outputFileName);
+%         delete(fullFileName)
+%         fprintf(1, 'Now writing %s\n', outputFileName);
+%         imwrite(binaryImageArray, outputFileName);
+%     end
+% end
+% 
+% 
+% function arr = stringToNumericArray(string)
+%     arr = split(string, ' ');
+%     arr = arr';
+%     for i = 1 : size(arr, 2)
+%         arr{1, i} = str2num(arr{1, i});
+%     end
+% end
+% 
+% 
+% 
+% 

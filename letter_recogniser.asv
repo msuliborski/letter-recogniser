@@ -189,6 +189,9 @@ optionSetPkt3 = trainingOptions('sgdm', ...
     'Plots', 'training-progress');
 
 
+  jpg_to_bw_png>convFolderToBinary('test')
+
+
 % % Pkt a 
 % 
 % disp('Train network netPkt1');
