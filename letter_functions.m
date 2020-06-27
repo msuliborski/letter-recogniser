@@ -54,6 +54,14 @@ classdef letter_functions
             net = netIn;
             net.trainFcn = trainFunction;
         end
+        
+        function net = segmentData(netIn, trainRatio, valRatio, restRatio)
+            net = netIn;
+            net.divideFcn = 'dividerand';
+            net.divideParam.trainRatio = trainRatio;
+            net.divideParam.valRatio = valRatio;
+            net.divideParam.testRatio = restRatio;
+        end
 
         function net = selectActivation(netIn, actvationFunction)
             net = netIn;
@@ -221,13 +229,8 @@ classdef letter_functions
                 arr{1, i} = str2num(arr{1, i});
             end
             arr = cell2mat(arr);
+            accuracy = r/size(out,2)*100
         end
-
-<<<<<<< HEAD
-        accuracy = r/size(out,2)*100
+        
     end  
-    
-=======
->>>>>>> 5828721aef923a70e1391fb94afee7056fffadda
-    end
 end
