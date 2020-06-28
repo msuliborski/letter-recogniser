@@ -173,6 +173,12 @@ classdef letter_functions
             accuracy = r/size(out,2)*100;
         end
         
+        function output = classifyImageFromFilename(net, filename)
+            letter_functions.convImgToBinary(filename);
+            output = letter_functions.classifyImage(net,imread(filename));
+        end
+        
+        
         function output = classifyImage(net, image)
             my_imgA_set_3 = [];
             targetA_set_3 = [];

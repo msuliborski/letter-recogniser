@@ -22,7 +22,7 @@ net = train(net, inputs, targets);
 
 
 [inputs, targets] = letter_functions.getDataset('custom');
-net = letter_functions.segmentData(net, 0.50, 0.00, 0.00);
+net = letter_functions.segmentData(net, 0.30, 0.35, 0.35);
 net = train(net, inputs, targets);
 
 
