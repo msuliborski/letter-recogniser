@@ -4,7 +4,7 @@ clear;
 % Used: 10   5,5   10,10   10,20,30   10,20,30,40,60 
 net = letter_functions.createNet('10 20 30'); 
 % Used: trainlm, trainbfg, trainbr, traingda, trainr
-net = letter_functions.selectTraining(net, 'trainlm'); 
+net = letter_functions.selectTraining(net, 'trainbr'); 
 % Used: tansig, purelin, hardlim, poslin, logsig, logsig
 net.layers{1}.transferFcn = 'tansig';
 net.layers{2}.transferFcn = 'tansig';
