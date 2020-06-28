@@ -17,6 +17,11 @@ net = letter_functions.segmentData(net, 0.90, 0.05, 0.05);
 [net, tr] = letter_functions.trainFunction(net, inputs, targets);
 
 
+[inputs, targets] = letter_functions.getDataset('123');
+net = train(net, inputs, targets);
+
+
+
 disp('Accuracy in the all images');
 [inputs, targets] = letter_functions.getDataset('all');
 
@@ -24,12 +29,27 @@ accuracy = letter_functions.getAccuracyOfInput(net, inputs, targets);
 disp(accuracy);
 
 
-disp('Accuracy in the test set');
-inputs = inputs(:, tr.testInd);
-targets = targets(:, tr.testInd);
+disp('Accuracy in the set_1 images');
+[inputs, targets] = letter_functions.getDataset('1');
 
 accuracy = letter_functions.getAccuracyOfInput(net, inputs, targets);
 disp(accuracy);
+
+
+disp('Accuracy in the set_2 images');
+[inputs, targets] = letter_functions.getDataset('2');
+
+accuracy = letter_functions.getAccuracyOfInput(net, inputs, targets);
+disp(accuracy);
+
+
+
+disp('Accuracy in the set_3 images');
+[inputs, targets] = letter_functions.getDataset('3');
+
+accuracy = letter_functions.getAccuracyOfInput(net, inputs, targets);
+disp(accuracy);
+
 
     
     

@@ -111,9 +111,10 @@ classdef letter_functions
             net = netIn;
             layerCount = size(net.Layers);
 
-            for i=1:layerCount
+            for i=1:(layerCount-1)
                 net.layers{i}.transferFcn = actvationFunction;
             end
+            net.layers{layerCount}.transferFcn = 'purelin';
         end
 
         function [net, tr] = trainFunction(netIn, inputs, targets)
