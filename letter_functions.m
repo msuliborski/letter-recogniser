@@ -173,8 +173,26 @@ classdef letter_functions
         end
         
         function output = classifyImage(net, image)
-            imageOneD = image(:)';
-            output = classify(net, imageOneD);
+            my_imgA_set_3 = [];
+            targetA_set_3 = [];
+            nfile = max(size(image));
+            OneDArray = reshape(image',[1 size(image,1)*size(image,2)]);
+            OneDArray = OneDArray';
+
+            out = sim(net, OneDArray);
+            [m,i] = max(out)
+
+            if i == 1 
+                output = 'A';
+            elseif i == 2 
+                output = 'E';
+            elseif i == 3
+                output = 'I';
+            elseif i == 4 
+                output = 'O';
+            elseif i == 5
+                output = 'U';
+            end
         end
 
         function accuracy = getAccuracyOfInput(net, inputs, targets)
