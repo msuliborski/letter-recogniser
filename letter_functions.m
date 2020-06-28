@@ -111,9 +111,10 @@ classdef letter_functions
             net = netIn;
             layerCount = size(net.Layers);
 
-            for i=1:layerCount
+            for i=1:(layerCount-1)
                 net.layers{i}.transferFcn = actvationFunction;
             end
+            net.layers{layerCount}.transferFcn = 'purelin';
         end
 
         function [net, tr] = trainFunction(netIn, inputs, targets)
@@ -171,6 +172,12 @@ classdef letter_functions
 
             accuracy = r/size(out,2)*100;
         end
+        
+        function output = classifyImageFromFilename(net, filename)
+            letter_functions.convImgToBinary(filename);
+            output = letter_functions.classifyImage(net,imread(filename));
+        end
+        
         
         function output = classifyImage(net, image)
             my_imgA_set_3 = [];
