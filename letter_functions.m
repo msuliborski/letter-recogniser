@@ -158,7 +158,7 @@ classdef letter_functions
             inputs = [];
             targets = [];
 
-            [inputs, targets] = readDataSet(set);
+            [inputs, targets] = letter_functions.readDataSet(set);
             out = sim(net, inputs);
 
             r = 0;
