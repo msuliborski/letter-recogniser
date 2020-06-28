@@ -52,7 +52,7 @@ classdef letter_functions
             filePath1 = strcat(filePath, '\');
             %extension = '/*.png';
             folder_pngs_path =  strcat(filePath1, '*.png');
-            images  = dir(folder_pngs_path )
+            images  = dir(folder_pngs_path);
             nfile = max(size(images));
 
             for i=1:nfile
@@ -111,9 +111,10 @@ classdef letter_functions
             net = netIn;
             layerCount = size(net.Layers);
 
-            for i=1:layerCount
+            for i=1:(layerCount-1)
                 net.layers{i}.transferFcn = actvationFunction;
             end
+            net.layers{layerCount}.transferFcn = 'purelin';
         end
 
         function [net, tr] = trainFunction(netIn, inputs, targets)
@@ -180,7 +181,7 @@ classdef letter_functions
             OneDArray = OneDArray';
 
             out = sim(net, OneDArray);
-            [m,i] = max(out)
+            [m,i] = max(out);
 
             if i == 1 
                 output = 'A';
