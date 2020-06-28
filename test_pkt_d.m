@@ -21,6 +21,10 @@ net = letter_functions.segmentData(net, 0.90, 0.05, 0.05);
 net = train(net, inputs, targets);
 
 
+[inputs, targets] = letter_functions.getDataset('custom');
+net = letter_functions.segmentData(net, 0.50, 0.00, 0.00);
+net = train(net, inputs, targets);
+
 
 disp('Accuracy in the all images');
 [inputs, targets] = letter_functions.getDataset('all');
@@ -30,27 +34,27 @@ disp(accuracy);
 
 
 disp('Accuracy in the set_custom A images');
-[inputs, targets] = letter_functions.redDataSetVowel('set_custom', 'A', [1 0 0 0 0]);
+[inputs, targets] = letter_functions.readDataSetVowel('set_custom', 'A', [1 0 0 0 0]);
 accuracy = letter_functions.getAccuracyOfInput(net, inputs, targets);
 disp(accuracy);
 
 disp('Accuracy in the set_custom E images');
-[inputs, targets] = letter_functions.redDataSetVowel('set_custom', 'E', [0 1 0 0 0]);
+[inputs, targets] = letter_functions.readDataSetVowel('set_custom', 'E', [0 1 0 0 0]);
 accuracy = letter_functions.getAccuracyOfInput(net, inputs, targets);
 disp(accuracy);
 
 disp('Accuracy in the set_custom I images');
-[inputs, targets] = letter_functions.redDataSetVowel('set_custom', 'I', [0 0 1 0 0]);
+[inputs, targets] = letter_functions.readDataSetVowel('set_custom', 'I', [0 0 1 0 0]);
 accuracy = letter_functions.getAccuracyOfInput(net, inputs, targets);
 disp(accuracy);
 
 disp('Accuracy in the set_custom O images');
-[inputs, targets] = letter_functions.redDataSetVowel('set_custom', 'O', [0 0 0 1 0]);
+[inputs, targets] = letter_functions.readDataSetVowel('set_custom', 'O', [0 0 0 1 0]);
 accuracy = letter_functions.getAccuracyOfInput(net, inputs, targets);
 disp(accuracy);
 
 disp('Accuracy in the set_custom U images');
-[inputs, targets] = letter_functions.redDataSetVowel('set_custom', 'U', [0 0 0 0 1]);
+[inputs, targets] = letter_functions.readDataSetVowel('set_custom', 'U', [0 0 0 0 1]);
 accuracy = letter_functions.getAccuracyOfInput(net, inputs, targets);
 disp(accuracy);
 
