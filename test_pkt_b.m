@@ -4,15 +4,16 @@ clear;
 % Used: 10   5,5   10,10   10,20,30   10,20,30,40,60 
 net = letter_functions.createNet('10 20 30'); 
 % Used: trainlm, trainbfg, trainbr, traingda, trainr
-net = letter_functions.selectTraining(net, 'trainbr'); 
+net = letter_functions.selectTraining(net, 'trainlm'); 
 % Used: tansig, purelin, hardlim, poslin, logsig, logsig
+% tansig, tansig, tansig, purelin
 net.layers{1}.transferFcn = 'tansig';
 net.layers{2}.transferFcn = 'tansig';
 net.layers{3}.transferFcn = 'tansig';
 net.layers{4}.transferFcn = 'purelin';
 
 [inputs, targets] = letter_functions.getDataset('2');
-net = letter_functions.segmentData(net, 0.7, 0.15, 0.15);
+net = letter_functions.segmentData(net, 0.6, 0.2, 0.2);
 
 [net, tr] = letter_functions.trainFunction(net, inputs, targets);
 plotperf(tr) 
