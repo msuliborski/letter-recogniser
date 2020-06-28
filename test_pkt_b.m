@@ -16,10 +16,8 @@ net.layers{6}.transferFcn = 'purelin';
 [inputs, targets] = letter_functions.getDataset('2');
 net = letter_functions.segmentData(net, 0.7, 0.15, 0.15);
 
-
 [net, tr] = letter_functions.trainFunction(net, inputs, targets);
 plotperf(tr) 
-
 
 
 disp('Accuracy in the all images');
