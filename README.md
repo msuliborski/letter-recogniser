@@ -4,7 +4,7 @@ Application capable of recognising handwritten letters (A, E, I, O and U), devel
 ### Cloning
 
 ```
-$ git clone https://github.com/msuliborski/database-tasks
+$ git clone https://github.com/msuliborski/letter-recogniser
 ```
 
 ## Authors
